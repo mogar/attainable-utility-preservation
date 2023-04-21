@@ -6,7 +6,7 @@ import numpy as np
 class ModelFreeAUPAgent:
     name = "Model-free AUP"
     pen_epsilon, AUP_epsilon = .2, .9  # chance of choosing greedy action in training
-    default = {'lambd': 1./1.501, 'discount': .996, 'rpenalties': 30, 'episodes': 60} #6000}
+    default = {'lambd': 1./1.501, 'discount': .996, 'rpenalties': 30, 'episodes': 600} #6000}
 
     def __init__(self, env, lambd=default['lambd'], state_attainable=False, num_rewards=default['rpenalties'],
                  discount=default['discount'], episodes=default['episodes'], trials=50, use_scale=False):
@@ -20,7 +20,7 @@ class ModelFreeAUPAgent:
         :param episodes:
         :param trials:
         """
-        self.actions = range(env.action_space.n)
+        self.actions = range(len(env.actions))
         self.probs = [[1.0 / (len(self.actions) - 1) if i != k else 0 for i in self.actions] for k in self.actions]
         self.discount = discount
         self.episodes = episodes
