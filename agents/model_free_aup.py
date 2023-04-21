@@ -48,7 +48,6 @@ class ModelFreeAUPAgent:
         # 0: high-impact, incomplete; 1: high-impact, complete; 2: low-impact, incomplete; 3: low-impact, complete
         self.counts = np.zeros(4)
 
-        show = True
         for trial in range(self.trials):
             self.attainable_Q = defaultdict(lambda: np.zeros((len(self.attainable_set), len(self.actions))))
             self.AUP_Q = defaultdict(lambda: np.zeros(len(self.actions)))
@@ -62,9 +61,6 @@ class ModelFreeAUPAgent:
                 time_step = env.reset()
                 while not time_step.last:
                     last_board = str(env.get_obs()['board'])
-                    if show:
-                        show = False
-                        print(last_board)
                     action = self.behavior_action(last_board)
                     time_step = env.step(action)
                     self.update_greedy(last_board, action, time_step)
