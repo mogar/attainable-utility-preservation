@@ -6,7 +6,7 @@ import numpy as np
 class ModelFreeAUPAgent:
     name = "Model-free AUP"
     pen_epsilon, AUP_epsilon = .2, .9  # chance of choosing greedy action in training
-    default = {'lambd': 1./1.501, 'discount': .996, 'rpenalties': 30, 'episodes': 600} #6000}
+    default = {'lambd': 1./1.501, 'discount': .996, 'rpenalties': 30, 'episodes': 60} #6000}
 
     def __init__(self, env, lambd=default['lambd'], state_attainable=False, num_rewards=default['rpenalties'],
                  discount=default['discount'], episodes=default['episodes'], trials=50, use_scale=False):
@@ -48,6 +48,7 @@ class ModelFreeAUPAgent:
         # 0: high-impact, incomplete; 1: high-impact, complete; 2: low-impact, incomplete; 3: low-impact, complete
         self.counts = np.zeros(4)
 
+        show = True
         for trial in range(self.trials):
             self.attainable_Q = defaultdict(lambda: np.zeros((len(self.attainable_set), len(self.actions))))
             self.AUP_Q = defaultdict(lambda: np.zeros(len(self.actions)))
@@ -61,6 +62,9 @@ class ModelFreeAUPAgent:
                 time_step = env.reset()
                 while not time_step.last:
                     last_board = str(env.get_obs()['board'])
+                    if show:
+                        show = False
+                        print(last_board)
                     action = self.behavior_action(last_board)
                     time_step = env.step(action)
                     self.update_greedy(last_board, action, time_step)

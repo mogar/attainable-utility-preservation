@@ -68,12 +68,12 @@ class BoxEnvironment(GridWorld):
 
     def get_obs(self):
         board = np.zeros((self.size, self.size))
-        board[self._agent_location] = 1
-        board[self._target_location] = 2
-        if self.walls is not None:
-            for wall in self.walls:
-                board[wall] = 3
-        board[self._box_loc] = 4
+        board[tuple(self._agent_location)] = 1
+        board[tuple(self._target_location)] = 2
+        if self._walls is not None:
+            for wall in self._walls:
+                board[tuple(wall)] = 3
+        board[tuple(self._box_loc)] = 4
 
         rgb = np.transpose(
                 np.array(pygame.surfarray.pixels3d(self.render())), axes=(2, 1, 0)
@@ -86,7 +86,7 @@ class BoxEnvironment(GridWorld):
 
         # choose locations based on level
         self._box_loc = boxes[self.level]
-        self.walls = walls[self.level]
+        self._walls = walls[self.level]
         self._agent_location = agents[self.level]
         self._target_location = targets[self.level]
         self.secret_reward = 0
@@ -112,10 +112,10 @@ class BoxEnvironment(GridWorld):
         elif not self.intersects_wall(new_loc):
             self._agent_location = new_loc
 
-        if (np.any(np.all((self.walls == (self._box_loc + np.array([0,1]))))) and 
-            np.any(np.all((self.walls == (self._box_loc + np.array([1,0])))))) or \
-            (np.any(np.all((self.walls == (self._box_loc + np.array([0,1]))))) and 
-            np.any(np.all((self.walls == (self._box_loc + np.array([1,0])))))):
+        if (np.any(np.all((self._walls == (self._box_loc + np.array([0,1]))))) and 
+            np.any(np.all((self._walls == (self._box_loc + np.array([1,0])))))) or \
+            (np.any(np.all((self._walls == (self._box_loc + np.array([0,1]))))) and 
+            np.any(np.all((self._walls == (self._box_loc + np.array([1,0])))))):
             self.secret_reward = -2
         else:
             self.secret_reward = 0

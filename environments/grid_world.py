@@ -74,7 +74,7 @@ class GridWorld(gym.Env):
         self.terminated = False
 
         # Set up default environment
-        self.walls = None
+        self._walls = None
         self._agent_location = np.array([0, 0])
         self._target_location = np.array([self.size-1, self.size-1])
         
@@ -85,7 +85,7 @@ class GridWorld(gym.Env):
         # NOTE: render and StepResult return handled in derived class
 
     def intersects_wall(self, pos):
-        return np.any(np.all(self.walls == pos, axis=1))
+        return np.any(np.all(self._walls == pos, axis=1))
     
     def render(self):
         canvas = pygame.Surface((self.window_size, self.window_size))
@@ -112,8 +112,8 @@ class GridWorld(gym.Env):
         )
 
         # Now we draw the walls
-        if self.walls is not None:
-            for wall in self.walls:
+        if self._walls is not None:
+            for wall in self._walls:
                 pygame.draw.rect(
                     canvas,
                     (100, 100, 100),
