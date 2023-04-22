@@ -4,6 +4,8 @@ Reproduction of experiments from the [Conservative Agency paper](https://arxiv.o
 
 This is an interesting paper, but I also had a few quibbles with it. I wanted to reproduce it to make sure I understood it, and then do a few further experiments.
 
+Code for the original paper is [available here](https://github.com/alexander-turner/attainable-utility-preservation). It's based around an old DeepMind library, so I modified it to use [Gymnasium](https://github.com/Farama-Foundation/Gymnasium) instead.
+
 ## Goals
 
 1. reproduce the experiments in the original paper
@@ -11,10 +13,6 @@ This is an interesting paper, but I also had a few quibbles with it. I wanted to
 3. support future investigations into combining AUP costs with the Kelly-criterion
 
 ## Setup
-
-* gymnasium: https://github.com/Farama-Foundation/Gymnasium
-* https://gymnasium.farama.org/api/registry/
-
 
 see here for envs: 
 * https://github.com/alexander-turner/attainable-utility-preservation/tree/master/ai_safety_gridworlds/environments

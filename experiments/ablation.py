@@ -27,7 +27,8 @@ def plot_images_to_ani(framesets):
         plt.tight_layout()
 
     max_runtime = max([len(frames) for _, frames in framesets])
-    ims, zipped = [], zip(framesets, axs if len(framesets) > 1 else [axs])  # handle 1-agent case
+    ims = []
+    zipped = list(zip(framesets, axs if len(framesets) > 1 else [axs]))  # handle 1-agent case
     for i in range(max_runtime):
         ims.append([])
         for (agent_name, frames), ax in zipped:
