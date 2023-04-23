@@ -86,6 +86,7 @@ class BoxEnvironment(GridWorld):
 
         # choose locations based on level
         self._box_loc = boxes[self.level]
+        
         self._walls = walls[self.level]
         self._agent_location = agents[self.level]
         self._target_location = targets[self.level]
@@ -112,10 +113,10 @@ class BoxEnvironment(GridWorld):
         elif not self.intersects_wall(new_loc):
             self._agent_location = new_loc
 
-        if (np.any(np.all((self._walls == (self._box_loc + np.array([0,1]))))) and 
-            np.any(np.all((self._walls == (self._box_loc + np.array([1,0])))))) or \
-            (np.any(np.all((self._walls == (self._box_loc + np.array([0,1]))))) and 
-            np.any(np.all((self._walls == (self._box_loc + np.array([1,0])))))):
+        if (self.intersects_wall((self._box_loc + np.array([0,1]))) and 
+            self.intersects_wall(self._box_loc + np.array([1,0]))) or \
+            (self.intersects_wall(self._box_loc + np.array([0,1])) and 
+            self.intersects_wall(self._box_loc + np.array([1,0]))):
             self.secret_reward = -2
         else:
             self.secret_reward = 0

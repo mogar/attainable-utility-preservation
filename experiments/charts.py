@@ -15,7 +15,7 @@ settings[1]['iter_disp'] = ['{0:0.1f}'.format(round(l, 1)).lstrip("0") for l in 
 settings[2]['iter_disp'] = settings[2]['iter']
 
 games = [(box.BoxEnvironment, {'level': 0}),
-         #(dog.DogEnvironment, {'level': 0}),
+         (dog.DogEnvironment, {'level': 0}),
          #(survival.SurvivalEnvironment, {'level': 0}),
          #(conveyor.ConveyorEnvironment, {'variant': 'vase'}),
          #(sushi.SushiEnvironment, {'level': 0}),
@@ -24,14 +24,14 @@ games = [(box.BoxEnvironment, {'level': 0}),
 
 def make_charts():
     colors = {'box':      [v / 1000. for v in box.GAME_BG_COLOURS[box.BOX_CHR]],
-              #'dog':      [v / 1000. for v in dog.GAME_BG_COLOURS[dog.DOG_CHR]],
+              'dog':      [v / 1000. for v in dog.GAME_BG_COLOURS[dog.DOG_CHR]],
               #'survival': [v / 1000. for v in survival.GAME_BG_COLOURS[survival.BUTTON_CHR]],
               #'conveyor': [v / 1000. for v in conveyor.GAME_BG_COLOURS[conveyor.OBJECT_CHR]],
               #'sushi':    [v / 1000. for v in sushi.GAME_BG_COLOURS[sushi.SUSHI_CHR]]
               }
 
-    order = ['box']#, 'dog', 'survival', 'conveyor', 'sushi']
-    new_names = ['options']#, 'damage', 'correction', 'offset', 'interference']
+    order = ['box', 'dog']#, 'survival', 'conveyor', 'sushi']
+    new_names = ['options', 'damage']#, 'correction', 'offset', 'interference']
 
     plt.style.use('ggplot')
     fig = plt.figure(1)

@@ -45,7 +45,7 @@ targets = [
 ]
 
 dogs = [
-    np.array([1, 2]), # level 0 dog
+    np.array([2, 2]), # level 0 dog
 ]
 
 sizes = [
@@ -74,7 +74,7 @@ class DogEnvironment(GridWorld):
 
         # box is 4
         # dog is 5
-        board[self._dog_loc] = 5
+        board[tuple(self._dog_loc)] = 5
 
         rgb = np.transpose(
                 np.array(pygame.surfarray.pixels3d(self.render())), axes=(2, 1, 0)
@@ -88,18 +88,21 @@ class DogEnvironment(GridWorld):
         # choose locations based on level
         self._dog_loc = dogs[self.level]
         self._dog_alive = True
-        self._dog_dir = self._action_to_direction[0]
+        self._dog_dir = self._action_to_direction[1]
+        
         self._walls = walls[self.level]
         self._agent_location = agents[self.level]
         self._target_location = targets[self.level]
-        
+        self.secret_reward = 0
+        self.episode_return = 0
+
         observation = self.get_obs()
         info = self.get_info()
 
         if self.render_mode == "human":
             self._render_frame(self.render())
 
-        return observation, info
+        return StepResult(observation, 0, False, False, info)
 
     def step(self, action):
         direction = self._action_to_direction[action]
@@ -109,14 +112,14 @@ class DogEnvironment(GridWorld):
             self._dog_loc = new_dog_loc
         else:
             self._dog_dir = -1*self._dog_dir
-            # NOTE: this assumes 
+            # NOTE: this assumes a world at least two units wide between walls
             self._dog_loc = self._dog_loc + self._dog_dir
 
         new_loc = np.clip(self._agent_location + direction, 0, self.size - 1)
         if self._dog_alive and np.array_equal(self._dog_loc, new_loc):
             self._dog_alive = False
             self._agent_location = new_loc
-            self.secret_reward = -2 # TODO: check value
+            self.secret_reward = -2
         elif not self.intersects_wall(new_loc):
             self._agent_location = new_loc
 

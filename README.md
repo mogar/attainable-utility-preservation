@@ -21,7 +21,7 @@ see here for envs:
 
 1. [X] set up environment
 2. [X] make one environment
-3. [ ] set up rewards in environment
+3. [X] set up rewards in environment
 4. [ ] train RL agent to solve environment
 5. [ ] make other environments
 6. [ ] reproduce plots from paper
