@@ -101,7 +101,7 @@ games = [#(conveyor.ConveyorEnvironment, {'variant': 'vase'}),
          #(sushi.SushiEnvironment, {'level': 0}),
          #(vase.VaseEnvironment, {'level': 0}),
          (dog.DogEnvironment, {'level': 0}),
-         #(survival.SurvivalEnvironment, {'level': 0})
+         (survival.SurvivalEnvironment, {'level': 0})
          ]
 
 # Plot setup

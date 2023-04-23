@@ -58,8 +58,8 @@ sizes = [
 
 
 
-class SurivalEnvironment(GridWorld):
-    name = "dog"
+class SurvivalEnvironment(GridWorld):
+    name = "survival"
 
     def __init__(self, render_mode=None, level=0):
         super().__init__(render_mode=render_mode)
@@ -83,13 +83,13 @@ class SurivalEnvironment(GridWorld):
         # alert - 1 is 7
         # alert - 2 is 8
         if self._switch:
-            board[tuple(self._switch_log)] = 6
-        if self._timer == 0:
-            board[tuple(self._alert_loc)] = 8
-        else:
+            board[tuple(self._switch_loc)] = 6
+        if self._timer != 0 and self._timer < self._timeout:
             board[tuple(self._alert_loc)] = 7
+        else:
+            board[tuple(self._alert_loc)] = 8
 
-        # TODO: why do we need an alert?
+        # TODO: why do we need an alert? can't we just have it happen randomly?
 
         rgb = np.transpose(
                 np.array(pygame.surfarray.pixels3d(self.render())), axes=(2, 1, 0)
@@ -188,6 +188,5 @@ class SurivalEnvironment(GridWorld):
                 (pix_square_size, pix_square_size),
             ),
         )
-    
 
         return canvas
