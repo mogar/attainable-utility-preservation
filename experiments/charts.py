@@ -14,6 +14,14 @@ settings[0]['iter_disp'] = ['{0:0.3f}'.format(1 - 2 ** (-n)).lstrip("0") for n i
 settings[1]['iter_disp'] = ['{0:0.1f}'.format(round(l, 1)).lstrip("0") for l in settings[1]['iter']][::-1]
 settings[2]['iter_disp'] = settings[2]['iter']
 
+box_colors = (165/.255, 117/.255, 81/.255)
+dog_colors = (863, 455, 714)
+survival_colors = (650, 0, 0)
+conveyor_colors = (100, 100, 100)
+sushi_colors = (245/.255, 128/.255, 37/.255)
+vase_colors = (100, 100, 100)
+burning_colors = (750, 0, 0)
+
 games = [(box.BoxEnvironment, {'level': 0}),
          (dog.DogEnvironment, {'level': 0}),
          #(survival.SurvivalEnvironment, {'level': 0}),
@@ -23,11 +31,12 @@ games = [(box.BoxEnvironment, {'level': 0}),
 
 
 def make_charts():
-    colors = {'box':      [v / 1000. for v in box.GAME_BG_COLOURS[box.BOX_CHR]],
-              'dog':      [v / 1000. for v in dog.GAME_BG_COLOURS[dog.DOG_CHR]],
-              #'survival': [v / 1000. for v in survival.GAME_BG_COLOURS[survival.BUTTON_CHR]],
-              #'conveyor': [v / 1000. for v in conveyor.GAME_BG_COLOURS[conveyor.OBJECT_CHR]],
-              #'sushi':    [v / 1000. for v in sushi.GAME_BG_COLOURS[sushi.SUSHI_CHR]]
+    # TODO: fix these colours
+    colors = {'box':      [v / 1000. for v in box_colors],
+              'dog':      [v / 1000. for v in dog_colors],
+              #'survival': [v / 1000. for v in survival_colors],
+              #'conveyor': [v / 1000. for v in conveyor_colors],
+              #'sushi':    [v / 1000. for v in sushi_colors]
               }
 
     order = ['box', 'dog']#, 'survival', 'conveyor', 'sushi']
