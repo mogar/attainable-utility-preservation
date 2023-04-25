@@ -14,8 +14,15 @@ Code for the original paper is [available here](https://github.com/alexander-tur
 
 ## Setup
 
-see here for envs: 
-* https://github.com/alexander-turner/attainable-utility-preservation/tree/master/ai_safety_gridworlds/environments
+```
+pip install -r requirements.txt
+```
+
+## Experiments
+
+To produce gifs of representative runs through each game: `python -m experiments.ablation`
+
+To produce traning charts: `python -m experiments.charts`
 
 ## TODO:
 
@@ -23,7 +30,7 @@ see here for envs:
 2. [X] make one environment
 3. [X] set up rewards in environment
 4. [X] train RL agent to solve environment
-5. [ ] make other environments
-6. [ ] reproduce plots from paper
+5. [X] make other environments
+6. [X] reproduce plots from paper
 7. [ ] fix _even trying_ in off-switch game
 8. [ ] formalize AU as a "cost", use a kelly regularization factor in reward
