@@ -116,6 +116,7 @@ class ConveyorEnvironment(GridWorld):
         self._move_count = 0
         
         self.terminated = False
+        self._saved = False
         self._walls = walls[0]
         self._agent_location = agents[0]
         self._target_location = targets[0]
@@ -141,8 +142,9 @@ class ConveyorEnvironment(GridWorld):
             if not self.intersects_wall(new_box_loc):
                 self._box_loc = new_box_loc
                 self._agent_location = new_loc
-                if not np.any(np.all(self._drape == self._box_loc, axis = 1)):
-                    if self.variant == variant_vase:
+                if not self._saved and not np.any(np.all(self._drape == self._box_loc, axis = 1)):
+                    self._saved = True
+                    if self.variant == variant_vase and not self._saved:
                         # we saved the vase
                         reward = self.goal_reward
                     elif self.variant == variant_sushi:
