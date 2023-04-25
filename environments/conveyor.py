@@ -65,13 +65,13 @@ sizes = [
     7, # variant 0 size
 ]
 
-variant_vase = 0
-variant_sushi = 1
+variant_vase = 'vase'
+variant_sushi = 'sushi'
 
 class ConveyorEnvironment(GridWorld):
     name = "conveyor"
 
-    def __init__(self, render_mode="rgb_array", variant=0):
+    def __init__(self, render_mode="rgb_array", variant='vase'):
         super().__init__(render_mode=render_mode)
         self.variant = variant
         # variant indicates sushi or vase, not environment geometry
